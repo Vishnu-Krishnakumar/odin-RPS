@@ -7,7 +7,93 @@
 </head>
 <body>
     <script>
-        console.log("whatsup");
+
+        function getComputerChoice(){
+            const choice = Math.floor(Math.random() * 3);
+            switch(choice){
+                case 0:
+                    return "rock";
+                    break;
+                case 1:
+                    return "paper";
+                    break;
+                case 2:
+                    return "scissors";
+            }
+        }
+        
+        function getHumanChoice(){
+            const humanChoice = prompt("Type rock,paper,scissors for your choice").toLowerCase();
+            return humanChoice;
+        }
+       
+        let humanScore = 0;
+        let computerScore = 0;
+
+        function playRound(humanChoice, computerChoice){
+            console.log(humanChoice);
+            console.log(computerChoice);
+           if(humanChoice === "rock") {
+                if(computerChoice ==="paper"){
+                    console.log("Paper beats rock! You lose!")
+                    computerScore++;
+                }
+                else if(computerChoice ==="scissors"){
+                    console.log("Rock beats scissors! You win!");
+                    humanScore++;
+                }
+                else{
+                    console.log("Looks like its rock! It's a tie!");
+                }
+
+           }
+
+           if(humanChoice ==="paper"){
+                if(computerChoice ==="scissors"){
+                    console.log("Scissors beats paper, you lose!");
+                    computerScore++;
+                }
+                else if(computerChoice ==="rock"){
+                    console.log("Paper beats rock, you win!");
+                    humanScore++;
+                }
+                else{
+                    console.log("looks like its paper, its a tie!");
+                }
+           }
+           if(humanChoice === "scissors"){
+                if(computerChoice ==="rock"){
+                    console.log("Rock beats scissors, you lose!");
+                    computerScore++;
+                }
+                else if(computerChoice ==="paper"){
+                    console.log("Scissors beats paper, you win!");
+                    humanScore++;
+                }
+                else{
+                    console.log("Looks like its scissors, its a tie!");
+                }
+           }
+        } 
+
+        
+        function playGame(){
+          for(let i = 0; i < 5 ; i++){
+            let humanSelection = getHumanChoice();
+            let computerSelection = getComputerChoice();
+            playRound(humanSelection,computerSelection);
+          }
+          if(humanScore === computerScore){
+            console.log(`Looks like its a tie ${humanScore} to ${computerScore}`);
+          } 
+          else if( humanScore > computerScore){
+            console.log(`Looks like the player wins with a score of ${humanScore} to ${computerScore}.`);
+          }
+          else{
+            console.log(`Looks like the computer wins with a score of ${computerScore} to ${humanScore}`);
+          } 
+        }
+        playGame();
     </script>
 </body>
 </html>
