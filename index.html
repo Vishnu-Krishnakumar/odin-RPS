@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+
+    <button id = "rock">Rock </button>
+    <button id = "paper">Paper </button>
+    <button id = "scissors">Scissors </button>
+    <div id = "roundInfo">
+        <p>The player score is <span id ="playerScore">0</span></p>
+        <p>The opponents score is <span id = "computerScore">0</span></p>
+    </div>
+
     <script>
 
         function getComputerChoice(){
@@ -31,8 +40,17 @@
         let computerScore = 0;
 
         function playRound(humanChoice, computerChoice){
+
+            if(humanScore === 5 || computerScore === 5){
+                humanScore = 0;
+                computerScore = 0;
+                const winner = document.querySelector(".winner");
+                winner.textContent = "";
+            }
+
             console.log(humanChoice);
             console.log(computerChoice);
+
            if(humanChoice === "rock") {
                 if(computerChoice ==="paper"){
                     console.log("Paper beats rock! You lose!")
@@ -61,6 +79,7 @@
                     console.log("looks like its paper, its a tie!");
                 }
            }
+           
            if(humanChoice === "scissors"){
                 if(computerChoice ==="rock"){
                     console.log("Rock beats scissors, you lose!");
@@ -74,26 +93,66 @@
                     console.log("Looks like its scissors, its a tie!");
                 }
            }
+
+           if(humanScore === 5 || computerScore === 5){
+            const container = document.querySelector("#roundInfo");
+            const content = document.createElement("p");
+            content.classList.add("winner");
+            if(humanScore === 5){
+                content.textContent = "The player won!";
+            }
+            else{
+                content.textContent = "The computer won!";
+            }
+            container.appendChild(content);
+           }
+
         } 
 
         
-        function playGame(){
-          for(let i = 0; i < 5 ; i++){
-            let humanSelection = getHumanChoice();
-            let computerSelection = getComputerChoice();
-            playRound(humanSelection,computerSelection);
-          }
-          if(humanScore === computerScore){
-            console.log(`Looks like its a tie ${humanScore} to ${computerScore}`);
-          } 
-          else if( humanScore > computerScore){
-            console.log(`Looks like the player wins with a score of ${humanScore} to ${computerScore}.`);
-          }
-          else{
-            console.log(`Looks like the computer wins with a score of ${computerScore} to ${humanScore}`);
-          } 
-        }
-        playGame();
+        // function playGame(){
+        //   for(let i = 0; i < 5 ; i++){
+        //     let humanSelection = getHumanChoice();
+        //     let computerSelection = getComputerChoice();
+        //     playRound(humanSelection,computerSelection);
+        //   }
+
+        //   if(humanScore === computerScore){
+        //     console.log(`Looks like its a tie ${humanScore} to ${computerScore}`);
+        //   } 
+        //   else if( humanScore > computerScore){
+        //     console.log(`Looks like the player wins with a score of ${humanScore} to ${computerScore}.`);
+        //   }
+        //   else{
+        //     console.log(`Looks like the computer wins with a score of ${computerScore} to ${humanScore}`);
+        //   } 
+        // }
+        // playGame();
+        let playerChoice = "";
+        const rock = document.querySelector("#rock");
+        const paper = document.querySelector("#paper");
+        const scissors = document.querySelector("#scissors");
+        let pScore = document.querySelector("#playerScore");
+        let cScore = document.querySelector("#computerScore");
+
+        rock.addEventListener("click", ()=>{
+            playRound("rock",getComputerChoice());
+            pScore.textContent = humanScore;
+            cScore.textContent = computerScore;
+        })
+
+        paper.addEventListener("click", ()=>{
+            playRound("paper",getComputerChoice());
+            pScore.textContent = humanScore;
+            cScore.textContent = computerScore;
+        })
+
+        scissors.addEventListener("click", ()=>{
+            playRound("scissors",getComputerChoice());
+            pScore.textContent = humanScore;
+            cScore.textContent = computerScore;
+        }) 
+
     </script>
 </body>
 </html>
